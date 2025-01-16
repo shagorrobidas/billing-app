@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Invoice Details{% endblock %}
+{% block content %}
+    <h1 class="text-center mb-4">Invoice Detail</h1>
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Invoice: {{ invoice.invoice_number }}</h4>
+            <p class="card-text"><strong>Customer:</strong> {{ invoice.customer.name }}</p>
+            <p class="card-text"><strong>Due Date:</strong> {{ invoice.due_date }}</p>
+            <p class="card-text"><strong>Total Amount:</strong> ${{ invoice.total_amount }}</p>
+            <p class="card-text">
+                <strong>Status:</strong> 
+                <span class="badge {% if invoice.status == 'Paid' %}bg-success{% else %}bg-warning{% endif %}">
+                    {{ invoice.status }}
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <h2 class="mb-3">Payments</h2>
+    {% if payments %}
+    <ul class="list-group mb-4">
+        {% for payment in payments %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ payment.payment_date }}</span>
+                <span>${{ payment.amount }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-muted">No payments recorded for this invoice yet.</p>
+    {% endif %}
+
+    <a href="{% url 'create_payment' invoice.id %}" class="btn btn-primary">Add Payment</a>
+</div>
+{% endblock %}

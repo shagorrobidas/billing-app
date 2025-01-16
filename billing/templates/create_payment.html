@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Make a Payment{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Payment for Invoice: <span class="text-primary">{{ invoice.invoice_number }}</span></h1>
+    
+    <!-- Invoice Details -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Invoice Summary</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Customer:</strong> {{ invoice.customer.name }}</p>
+                    <p><strong>Total Amount:</strong> ${{ invoice.total_amount }}</p>
+                    <p><strong>Status:</strong> 
+                        <span class="badge {% if invoice.status == 'Paid' %}bg-success{% else %}bg-warning{% endif %}">
+                            {{ invoice.status }}
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Form -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Make a Payment</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_payment_date" class="form-label">Payment Date</label>
+                            {{ form.payment_date }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_amount" class="form-label">Amount</label>
+                            {{ form.amount }}
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Submit Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

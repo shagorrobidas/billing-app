@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Invoice{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Create a New Invoice</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Invoice Details</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_customer" class="form-label">Customer</label>
+                            {{ form.customer }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_invoice_number" class="form-label">Invoice Number</label>
+                            {{ form.invoice_number }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_due_date" class="form-label">Due Date</label>
+                            {{ form.due_date }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_total_amount" class="form-label">Total Amount</label>
+                            {{ form.total_amount }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_status" class="form-label">Status</label>
+                            {{ form.status }}
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Create Invoice</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block script %}
+<script>
+    $(document).ready(function() {
+        // Initialize Select2 on the customer dropdown
+        $('.select2').select2({
+            placeholder: "Select a customer",
+            allowClear: true
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}
