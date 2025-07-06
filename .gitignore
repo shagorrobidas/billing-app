@@ -1,0 +1,15 @@
+# Python related
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Virtual environment
+venv/
+env/
+
+# VS Code settings
+.vscode/
+
+# OS generated
+.DS_Store
+Thumbs.db
